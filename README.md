@@ -7,7 +7,7 @@ Given a set of methylation beta values, this tool will calculate the Dunedin Met
 
 #### Installation (via devtools):
 ```r
-devtools::install_github("DLCorcoran/DunedinPACE")
+devtools::install_github("danbelsky/DunedinPACE")
 ```
 
 #### Requirements (preprocesscore Bioconductor package):
