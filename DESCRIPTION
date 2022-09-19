@@ -30,7 +30,7 @@ VignetteBuilder: knitr
 Encoding: UTF-8
 LazyData: true
 Imports: preprocessCore
-Depends: Depends: R (>= 3.5.0)
+Depends: R (>= 3.5.0)
 RoxygenNote: 7.1.0
 biocViews: Epigenetics, BiomedicalInformatics, MethylationArray, EpigeneticsWorkflow, Homo_sapiens 
 Author: David L. Corcoran [aut, cre],
