@@ -8,7 +8,7 @@ Authors@R: c(
     person(“Karen”, “Sugden”, email = "Karen.sugden@duke.edu", role = “aut”),
     person(“Avshalom”, “Caspi”, email = "avshalom.caspi@duke.edu", role = “aut”),
     person(“Daniel”, “Belsky”, email = "db3275@cumc.columbia.edu", role = “aut”), 
-    person("Calen Patrick", "Ryan", email = "cpr2139@cumc.columbia.edu", role="ctb", “cre”),         
+    person("Calen Patrick", "Ryan", email = "cpr2139@cumc.columbia.edu", role="ctb", “cre”))         
 License: GPL-3
 Encoding: UTF-8
 LazyData: true
