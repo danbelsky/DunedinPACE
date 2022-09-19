@@ -3,13 +3,11 @@ Version: 0.1.1
 Type: Package
 Title: Dunedin Pace of Aging Methylation Score Calculator based on Dunedin Age 45 data (DunedinPACE)
 Description: function returns the Dunedin Methylation Pace of Aging score (Dunedin) for methylation data generated from either the Illumina 450K array or the Illumina EPIC array.  The Age45 score is one that has been trained on data based on 3 waves of collection (26, 38, and 45) and has been published in the 2022 eLife paper.
-Authors@R: c(
-    person(“David L.”, “Corcoran”, email = "david.corcoran@unc.edu", role = "aut”),
+Authors@R: c(person(“David L.”, “Corcoran”, email = "david.corcoran@unc.edu", role = "aut”),
     person(“Karen”, “Sugden”, email = "Karen.sugden@duke.edu", role = “aut”),
     person(“Avshalom”, “Caspi”, email = "avshalom.caspi@duke.edu", role = “aut”),
     person(“Daniel”, “Belsky”, email = "db3275@cumc.columbia.edu", role = “aut”), 
-    person("Calen Patrick", "Ryan", email = "cpr2139@cumc.columbia.edu", role=c("ctb", “cre”))
-)         
+    person("Calen Patrick", "Ryan", email = "cpr2139@cumc.columbia.edu", role=c("ctb", “cre”)))         
 License: GPL-3
 Encoding: UTF-8
 LazyData: true
