@@ -27,6 +27,8 @@ PoAmProjector(betas)
 ```r
 getRequiredProbes()
 ```
+Note: In order to calculate `DunedinPACE`, you will need many other probes used in the pre-processing steps prior to `DunedinPACE` selection. Do __not__ filter your beta matrix using `getRequiredProbes()` prior to using the `PoAmProjector()` function. 
+
 
 ## Input:
 ####  betas:

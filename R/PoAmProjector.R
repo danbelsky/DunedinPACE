@@ -12,7 +12,7 @@
 #' PoAmProjector(betas)
 
 PoAmProjector = function( betas, proportionOfProbesRequired=0.8 ) {
-  require(preprocessCore)
+  requireNamespace(preprocessCore)
   # loop through models
   model_results <- lapply(mPOA_Models$model_names, function(model_name) {
     # make sure it has been converted to a matrix
