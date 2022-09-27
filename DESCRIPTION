@@ -32,7 +32,7 @@ LazyData: true
 Imports: preprocessCore
 Depends: R (>= 3.5.0)
 RoxygenNote: 7.1.0
-biocViews: Epigenetics, BiomedicalInformatics, MethylationArray, EpigeneticsWorkflow, Homo_sapiens 
+biocViews: Epigenetics, BiomedicalInformatics, MethylationArray
 Author: David L. Corcoran [aut, cre],
   Karen Sugden [aut],
   Avshalom Caspi [aut],
