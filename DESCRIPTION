@@ -25,7 +25,7 @@ Authors@R:
 		   role=c("ctb", "cre"), 
 		   comment = c(ORCID = "0000-0002-0550-7949")))     
 Description: function returns the Dunedin Methylation Pace of Aging score (Dunedin) for methylation data generated from either the Illumina 450K array or the Illumina EPIC array.  The Age45 score is one that has been trained on data based on 3 waves of collection (26, 38, and 45) and has been published in the 2022 eLife paper.    
-License: GPL-3
+License: GPL-3 + file LICENSE
 VignetteBuilder: knitr
 Encoding: UTF-8
 LazyData: true
@@ -39,6 +39,6 @@ Author: David L. Corcoran [aut, cre],
   Daniel Belsky [aut],
   Calen Patrick Ryan [ctb]
 Maintainer: Calen Patrick Ryan <cpr2139@cumc.columbia.edu>
-
-
-
+Suggests: 
+    knitr,
+    rmarkdown
