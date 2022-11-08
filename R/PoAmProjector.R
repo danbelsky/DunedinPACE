@@ -12,7 +12,7 @@
 #' PoAmProjector(betas)
 
 PoAmProjector = function( betas, proportionOfProbesRequired=0.8 ) {
-  requireNamespace(preprocessCore)
+  requireNamespace("preprocessCore")
   # loop through models
   model_results <- lapply(mPOA_Models$model_names, function(model_name) {
     # make sure it has been converted to a matrix
@@ -68,7 +68,7 @@ PoAmProjector = function( betas, proportionOfProbesRequired=0.8 ) {
         }
 
         # Normalize the matrix to the gold standard dataset
-        betas.norm <- normalize.quantiles.use.target(betas.mat, target=mPOA_Models$gold_standard_means[[model_name]])
+        betas.norm <- preprocessCore::normalize.quantiles.use.target(betas.mat, target=mPOA_Models$gold_standard_means[[model_name]])
         rownames(betas.norm) <- rownames(betas.mat)
         colnames(betas.norm) <- colnames(betas.mat)
         # Calculate score:
