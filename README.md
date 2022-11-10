@@ -1,7 +1,7 @@
 # DunedinPACE
 Pace of Age calculator for Illumina methyl-array data (DunedinPACE)
 
-PoAmProjector.R -- 20220105
+PACEProjector.R -- 20220105
 
 Given a set of methylation beta values, this tool will calculate the Dunedin Methylation Pace of Aging Methylation Score (DunedinPACE)
 
@@ -20,15 +20,18 @@ BiocManager::install("preprocessCore")
 #### Usage:
 ```r
 library("DunedinPACE")
-PoAmProjector(betas)
+PACEProjector(betas)
 ```
 
 #### To see list of probes necessary for each model:
 ```r
 getRequiredProbes()
 ```
-Note: In order to calculate `DunedinPACE`, you will need many other probes used in the pre-processing steps prior to `DunedinPACE` selection. Do __not__ filter your beta matrix using `getRequiredProbes()` prior to using the `PoAmProjector()` function. 
 
+`getRequiredProbes(backgroundList = FALSE)` returns 173 probes used for calculating DunedinPACE directly. 
+`getRequiredProbes(backgroundList = TRUE)` returns 173 probes used for calculating DunedinPACE directly, as well as 19827 probes used in the normalization process. 
+
+We do not recommend excluding the 19827 probes used for normalization and calculating DunedinPACE using only the 173 DunedinPACE associated probes, as this could affect DunedinPACE estimates.
 
 ## Input:
 ####  betas:
@@ -41,5 +44,5 @@ Note: In order to calculate `DunedinPACE`, you will need many other probes used 
     By default, this is set to 0.8
 
 ## Output:
-   A list containing the mPoAs for each model
+   A list containing the mPACEs for each model
 
