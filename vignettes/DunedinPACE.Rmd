@@ -10,28 +10,34 @@ vignette: >
   % \VignetteEncoding{UTF-8}
 ---
 
-# `DunedinPACE`
+# Introduction to DunedinPACE
 
 `DunedinPACE` is a novel blood biomarker of the pace of aging for gerontology and geroscience. It shows high test-retest reliability, is associated with morbidity, disability, and mortality, and indicated faster aging in young adults with childhood adversity. DunedinPACE effect-sizes are similar to GrimAge Clock effect-sizes. In analysis of incident morbidity, disability, and mortality, DunedinPACE and added incremental prediction beyond GrimAge.
 
-Click [this link](https://elifesciences.org/articles/73420) to access the original paper describing `DunedinPACE` in more detail.
+Citation for the original paper describing `DunedinPACE()` in more detail is provided below:
+
+ * Belsky DW, Caspi A, Corcoran DL, Sugden K, Poulton R, Arseneault L, Baccarelli A, Chamarti K, Gao X, Hannon E, et al. 2022. DunedinPACE, a DNA methylation biomarker of the pace of aging. Deelen J, editor. eLife. 11:e73420. doi:10.7554/eLife.73420.
 
 
-# Using `DunedinPACE calculator`
+
+
+
+# The `PACEProjector` function
+
+The `PACEProjector` calculator requires a matrix or data.frame of beta values where rownames are probe ids and column names correspond to sample names. Beta values must be numeric and missing values must be coded as 'NA'. 
+
 ```{r}
+#Load the library
 library(DunedinPACE)
 ```
 
 
-The `DunedinPACE` calculator requires a matrix or data.frame of beta values where rownames are probe ids and column names correspond to sample names. Beta values must be numeric and missing values must be coded as 'NA'. 
-
-It should look like this:
 ```{r}
+# Load the data
 load("Data/example_betas.Rdata")
 
 # Extract matrix of beta values
 beta_matrix <-SummarizedExperiment::assay(example_betas)
-
 
 ```
 
@@ -40,30 +46,46 @@ beta_matrix <-SummarizedExperiment::assay(example_betas)
 dim(beta_matrix)
 
 # Head of beta matrix
+# Data should look like this
+
 head(beta_matrix)
 ```
 
-Once you have your probe list, you can generate the `DunedinPACE` projections as follows:
+Generate the `DunedinPACE` projections as follows:
 
-
-Output will look like this
 ```{r}
-PoAmProjector(beta_matrix)
+pace_values <-PACEProjector(beta_matrix)
 ```
 
+The output will look like this
+```{r}
+pace_values
+```
 
-Note that you will need to have the package `preprocessCore` installed to run DunedinPACE.
+Which you can extract as follows:
+```{r}
+pace_values$DunedinPACE
+```
 
-The only other argument in the `PoAmProjector()` function is `proportionOfProbesRequired`. This is the threshold for number of probes required to run the function, and is by default set to 0.8. 
+The output, DunedinPACE, is equivalent to the pace of aging (in years) expected over a 1-year period. Higher values are equivalent to faster pace of aging, whereas lower values are equivalent to slower pace of aging.
 
-# `getRequiredProbes()`
 
-The `getRequiredProbes()` function shows you the core probes used for generating DunedinPACE. Note: In order to calculate `DunedinPACE`, you will need many other probes used in the pre-processing steps prior to `DunedinPACE` selection. 
+---
 
-**Important note: Do __not__ filter your beta matrix using `getRequiredProbes()` prior to using the `PoAmProjector()` function. You will get NAs as output. **
+The `PACEProjector` uses data from 20,000 CpGs. This includes 173 probes for PACE projection, and a background list that is used for normalization.
+
+It is possible to account for missing data using the `proportionOfProbesRequired` argument in the `PACEProjector()` function, which by default is set to 0.8. If you run `PACEProjector()` on a full matrix of 450k or EPIC array data, you should not encounter any problems. If you are missing a lot of data, you can optionally lower this threshold to force the calculator to do its job. However, we do not recommend excluding the 19827 probes used for normalization and calculating DunedinPACE using only the 173 DunedinPACE associated probes, as this could affect DunedinPACE estimates. 
+
+
+
+# The `getRequiredProbes()` function
+
+CpGs used in the PACE projector can be accessed using the `getRequiredProbes()` command. For a list 173 CpGs used directly for DunedinPACE projection, use the argument `getRequiredProbes(backgroundList = FALSE)`. For a list of all probes used in the `PACEProjector()`, which includes including an additional 19827 probes used for normalization, use the argument `getRequiredProbes(backgroundList = TRUE)`
+
+**Again, we do not recommend excluding the 19827 probes used for normalization and calculating DunedinPACE using only the 173 DunedinPACE associated probes, as this could affect DunedinPACE estimates.  **
 
 ```{r}
-getRequiredProbes()
+getRequiredProbes(backgroundList = FALSE)
 ```
 
 

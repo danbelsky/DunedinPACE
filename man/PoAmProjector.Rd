@@ -20,7 +20,7 @@ Missing data handled in two different ways (and the threshold for both is set by
 
 \details{
 %%  ~~ If necessary, more details than the __description__ above ~~
-A list of mPoA values.  There will be one element in the list for each mPoA model.  Each element will consist of a numeric vector with mPoA values.  The names of the values in the vector will be the sample names from the 'betas' matrix.
+A list of mPACE values.  There will be one element in the list for each mPACE model.  Each element will consist of a numeric vector with mPACE values.  The names of the values in the vector will be the sample names from the 'betas' matrix. The output is equivalent to the pace of aging (in years) expected over a 1-year period.
 
 }
 \source{
