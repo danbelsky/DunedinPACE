@@ -34,8 +34,7 @@ library(DunedinPACE)
 
 ```{r}
 # Load the data
-load("Data/example_betas.Rdata")
-
+data("example_betas")
 # Extract matrix of beta values
 beta_matrix <-SummarizedExperiment::assay(example_betas)
 
