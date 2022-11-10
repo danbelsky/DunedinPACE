@@ -1,5 +1,5 @@
-\name{PoAmProjector}
-\alias{PoAmProjector}
+\name{PACEProjector}
+\alias{PACEProjector}
 \title{
 %%   ~~ data name/kind ... ~~
 Calculate DunedinPACE
@@ -11,7 +11,7 @@ This function returns the Dunedin Methylation Pace of Aging scores for methylati
 Missing data handled in two different ways (and the threshold for both is set by the 'proportionOfProbesRequired' parameter). First, if a sample is missing data for more probes than the threshold, the sample will get an NA back for a score.  If a particular probe is missing fewer samples than the threshold, then missing data is set to the mean in the provided 'betas' matrix.  If a probe is missing more samples than the threshold, then all samples in the 'betas' matrix have their value replaced with the mean of the training data for that particular model.
 
 }
-\usage{PoAmProjector(betas, proportionOfProbesRequired = 0.8)}
+\usage{PACEProjector(betas, proportionOfProbesRequired = 0.8)}
 
 \arguments{
   \item{betas}{A numeric matrix containing the percent-methylation for each probe.  Missing data should be 'NA's.  The rows should be probes, with the probe ID as the row name, and the columns should be samples, with sample names as the column name.}
@@ -32,6 +32,6 @@ Belsky DW, Caspi A, Corcoran DL, Sugden K, Poulton R, Arseneault L, Baccarelli A
 
 }
 \examples{
-\dontrun{PoAmProjector(betas)}
+\dontrun{PACEProjector(betas)}
 }
 \keyword{file}
