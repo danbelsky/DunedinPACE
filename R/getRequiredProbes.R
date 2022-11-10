@@ -8,9 +8,9 @@
 #'
 getRequiredProbes = function(backgroundList=F) {
   if( backgroundList == FALSE ) {
-    mPOA_Models$model_probes
+    mPACE_Models$model_probes
   } else {
-    mPOA_Models$gold_standard_probes
+    mPACE_Models$gold_standard_probes
   }
 }
 

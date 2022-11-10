@@ -16,7 +16,7 @@ Returns a list containing the IDs of the probes needed for each Dunedin Pace of 
 \details{
 %%  ~~ If necessary, more details than the __description__ above ~~
 
-The probes derived from this function are NOT sufficient to calculate DunedinPACE. If you subset using this list, you will get `NA` from the `PoAmProjector()` function.
+The probes derived from this function are NOT sufficient to calculate DunedinPACE. If you subset using this list, you will get `NA` from the `PACEProjector()` function.
 
 }
 \source{

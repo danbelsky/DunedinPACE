@@ -27,28 +27,31 @@ The `DunedinPACE` calculator requires a matrix or data.frame of beta values wher
 
 It should look like this:
 ```{r}
-load("Data/betas.Rdata")
+load("Data/example_betas.Rdata")
+
+# Extract matrix of beta values
+beta_matrix <-SummarizedExperiment::assay(example_betas)
+
+
 ```
 
 ```{r}
-head(betas)
+# Dimensions of beta matrix
+dim(beta_matrix)
+
+# Head of beta matrix
+head(beta_matrix)
 ```
 
 Once you have your probe list, you can generate the `DunedinPACE` projections as follows:
 
-```{r, eval = FALSE}
-PoAmProjector(example)
-```
+
 Output will look like this
-
-```{r, echo = FALSE}
-samples <-c("7786915023_R02C02", "7786915135_R04C02", "7471147149_R06C01", "7786915035_R05C01", "7786923035_R01C01")
-nums <-c(1.0972737, 1.1191063, 0.9958676, 1.3322271, 1.1275386)
-
-names(nums) <-samples
-
-print(nums)
+```{r}
+PoAmProjector(beta_matrix)
 ```
+
+
 Note that you will need to have the package `preprocessCore` installed to run DunedinPACE.
 
 The only other argument in the `PoAmProjector()` function is `proportionOfProbesRequired`. This is the threshold for number of probes required to run the function, and is by default set to 0.8. 
