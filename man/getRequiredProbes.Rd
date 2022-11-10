@@ -16,7 +16,9 @@ Returns a list containing the IDs of the probes needed for each Dunedin Pace of 
 \details{
 %%  ~~ If necessary, more details than the __description__ above ~~
 
-The probes derived from this function are NOT sufficient to calculate DunedinPACE. If you subset using this list, you will get `NA` from the `PACEProjector()` function.
+The `PACEProjector` uses data from 20,000 CpGs. This includes 173 probes for PACE projection, and a background list that is used for normalization.
+We do not recommend using `getRequiredProbes(backgroundList=F)` to pre-select a subset of probes for the `PACEProjector` function, as this excludees the 19827 probes used for normalization and and could affect DunedinPACE estimates. If you need to pre-select probes, be sure to use `getRequiredProbes(backgroundList=TRUE)`.
+
 
 }
 \source{
