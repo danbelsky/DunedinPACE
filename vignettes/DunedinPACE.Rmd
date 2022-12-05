@@ -40,8 +40,10 @@ beta_matrix <-SummarizedExperiment::assay(example_betas)
 
 ```
 
+For this example, we use a subset of a full 450k or EPIC array containing only the probes required for the normalization step and the PACE projection. This saves space. Your example should have at least these 20k probes (see `getRequiredProbes()` function, below). 
+
 ```{r}
-# Dimensions of beta matrix
+# Dimensions of beta matrix 
 dim(beta_matrix)
 
 # Head of beta matrix
