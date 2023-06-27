@@ -1,8 +1,6 @@
 # DunedinPACE
 Pace of Age calculator for Illumina methyl-array data (DunedinPACE)
 
-PACEProjector.R -- 20220105
-
 Given a set of methylation beta values, this tool will calculate the Dunedin Methylation Pace of Aging Methylation Score (DunedinPACE)
 
 #### Installation (via devtools):
