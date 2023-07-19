@@ -1,0 +1,20 @@
+load("/Users/dr.cpr/Academic_2022/Projects/PACE_work/DunedinPACE/R/sysdata.rda")
+ls()
+mPace_Models
+ls
+ls()
+mPace_Models
+mPACE_Models
+mPACE_Models[1:5,]
+load("/Users/dr.cpr/Academic_2022/Projects/PACE_work/DunedinPACE/R/sysdata.rda")
+ls
+sysdata.rda
+ls
+ls()
+mPACE_Models
+load("/Users/dr.cpr/Academic_2022/Projects/PACE_work/DunedinPACE/R/sysdata.rda")
+ls
+ls()
+mPACE_Models
+ls(list = ())
+ls(list = (.))
