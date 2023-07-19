@@ -1,33 +1,24 @@
 #' Generate the Dunedin Methylation Pace of Aging Scores!
 #'
-#' \code{PACEProjector} returns the Dunedin Pace of Aging Methylation Scores
+#' \code{PoAmProjector} returns the Dunedin Pace of Aging Methylation Scores
 #'
 #' @param betas A numeric matrix containing the percent-methylation for each probe.  Missing data should be 'NA's.  The rows should be probes, with the probe ID as the row name, and the columns should be samples, with sample names as the column name.
 #' @param proportionOfProbesRequired (default: 0.8).  This value specificies the threshold for missing data (see description for more details on how missing data is handled)
-#' @return A list of mPACE values.  There will be one element in the list for each mPACE model.  Each element will consist of a numeric vector with mPACE values.  The names of the values in the vector will be the sample names from the 'betas' matrix. The output is equivalent to the pace of aging (in years) expected over a 1-year period.
+#' @return A list of mPoA values.  There will be one element in the list for each mPoA model.  Each element will consist of a numeric vector with mPoA values.  The names of the values in the vector will be the sample names from the 'betas' matrix.
 #' @details This function returns the Dunedin Methylation Pace of Aging scores for methylation data generated from either the Illumina 450K array or the Illumina EPIC array.  The Age45 score is one that has been trained on data based on 3 waves of collection (26, 38, and 45).  The manuscript is currently in preparation, but has been shown to be more accurate than the Age38 score.
 #' Missing data handled in two different ways (and the threshold for both is set by the 'proportionOfProbesRequired' parameter).  First, if a sample is missing data for more probes than the threshold, the sample will get an NA back for a score.  If a particular probe is missing fewer samples than the threshold, then missing data is set to the mean in the provided 'betas' matrix.  If a probe is missing more samples than the threshold, then all samples in the 'betas' matrix have their value replaced with the mean of the training data for that particular model.
-#' Because of how we handle missing data, it is recommended that entire cohorts be run at once as a large 'betas' matrix.
+#' Because of how we handle missing data, it is reccomended that entire cohorts be run at once as a large 'betas' matrix.
 #' @examples
-#' PACEProjector(betas)
+#' PoAmProjector(betas)
 
-
-PACEProjector = function( betas, proportionOfProbesRequired=0.8 ) {
+PoAmProjector = function( betas, proportionOfProbesRequired=0.8 ) {
   requireNamespace("preprocessCore")
-
-  # Check if row names have more than 10 characters and rename if necessary
-  if (any(nchar(rownames(betas)) > 10)) {
-    rownames(betas) <- substr(rownames(betas), 1, 10)
-    print("This looks like EPICv2. DunedinPACE will proceed with some missing probes. You may need to lower the proportionOfProbesRequired.")
-  }
-
-
   # loop through models
-  model_results <- lapply(mPACE_Models$model_names, function(model_name) {
+  model_results <- lapply(mPOA_Models$model_names, function(model_name) {
     # make sure it has been converted to a matrix
     if( !is.numeric(as.matrix(betas)) ) { stop("betas matrix/data.frame is not numeric!") }
-    probeOverlap <- length(which(rownames(betas) %in% mPACE_Models$model_probes[[model_name]])) / length(mPACE_Models$model_probes[[model_name]])
-    probeOverlap_background <- length(which(rownames(betas) %in% mPACE_Models$gold_standard_probes[[model_name]])) / length(mPACE_Models$gold_standard_probes[[model_name]])
+    probeOverlap <- length(which(rownames(betas) %in% mPOA_Models$model_probes[[model_name]])) / length(mPOA_Models$model_probes[[model_name]])
+    probeOverlap_background <- length(which(rownames(betas) %in% mPOA_Models$gold_standard_probes[[model_name]])) / length(mPOA_Models$gold_standard_probes[[model_name]])
     # make sure enough of the probes are present in the data file
     if( probeOverlap < proportionOfProbesRequired | probeOverlap_background < proportionOfProbesRequired ) {
       result <- rep(NA, ncol(betas))
@@ -35,15 +26,15 @@ PACEProjector = function( betas, proportionOfProbesRequired=0.8 ) {
       result
     } else {
       # Work with a numeric matrix of betas
-      betas.mat <- as.matrix(betas[which(rownames(betas) %in% mPACE_Models$gold_standard_probes[[model_name]]),])
+      betas.mat <- as.matrix(betas[which(rownames(betas) %in% mPOA_Models$gold_standard_probes[[model_name]]),])
       # If probes don't exist, we'll add them as rows of values based on their mean in the gold standard dataset
-      probesNotInMatrix <- mPACE_Models$gold_standard_probes[[model_name]][which(mPACE_Models$gold_standard_probes[[model_name]] %in% rownames(betas.mat) == F)]
+      probesNotInMatrix <- mPOA_Models$gold_standard_probes[[model_name]][which(mPOA_Models$gold_standard_probes[[model_name]] %in% rownames(betas.mat) == F)]
       if( length(probesNotInMatrix) > 0 ) {
         for( probe in probesNotInMatrix ) {
           tmp.mat <- matrix(0, nrow=1, ncol=ncol(betas.mat))
           rownames(tmp.mat) <- probe
           colnames(tmp.mat) <- colnames(betas.mat)
-          tmp.mat[probe,] <- rep(mPACE_Models$gold_standard_means[[model_name]][probe], ncol(tmp.mat))
+          tmp.mat[probe,] <- rep(mPOA_Models$gold_standard_means[[model_name]][probe], ncol(tmp.mat))
           betas.mat <- rbind(betas.mat, tmp.mat)
         }
       }
@@ -72,16 +63,16 @@ PACEProjector = function( betas, proportionOfProbesRequired=0.8 ) {
         if( length(which(pctValuesPresent < proportionOfProbesRequired)) > 0 ) {
           probesToReplaceWithMean <- rownames(betas.mat)[which(pctValuesPresent < proportionOfProbesRequired)]
           for( probe in probesToReplaceWithMean ) {
-            betas.mat[probe,] <- rep(mPACE_Models$model_means[[model_name]][probe], ncol(betas.mat))
+            betas.mat[probe,] <- rep(mPOA_Models$model_means[[model_name]][probe], ncol(betas.mat))
           }
         }
 
         # Normalize the matrix to the gold standard dataset
-        betas.norm <- preprocessCore::normalize.quantiles.use.target(betas.mat, target=mPACE_Models$gold_standard_means[[model_name]])
+        betas.norm <- preprocessCore::normalize.quantiles.use.target(betas.mat, target=mPOA_Models$gold_standard_means[[model_name]])
         rownames(betas.norm) <- rownames(betas.mat)
         colnames(betas.norm) <- colnames(betas.mat)
         # Calculate score:
-        score = mPACE_Models$model_intercept[[model_name]] + rowSums(t(betas.norm[mPACE_Models$model_probes[[model_name]],]) %*% diag(mPACE_Models$model_weights[[model_name]]))
+        score = mPOA_Models$model_intercept[[model_name]] + rowSums(t(betas.norm[mPOA_Models$model_probes[[model_name]],]) %*% diag(mPOA_Models$model_weights[[model_name]]))
         names(score) <- colnames(betas.norm)
         if( length(samplesToRemove) > 0 ) {
           score.tmp <- rep(NA, length(samplesToRemove))
@@ -97,14 +88,6 @@ PACEProjector = function( betas, proportionOfProbesRequired=0.8 ) {
       }
     }
   })
-  names(model_results) <- mPACE_Models$model_names
+  names(model_results) <- mPOA_Models$model_names
   model_results
-}
-
-
-
-# Note: This is a function to print an error for PoAmProjector as a result of the name change of the function.
-
-PoAmProjector <- function(beta_matrix) {
-  .Defunct(msg = "Function `PoAmProjector()` has been replaced by `PACEProjector()`...\nUse `PACEProjector()` instead")
 }
