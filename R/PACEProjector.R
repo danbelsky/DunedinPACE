@@ -18,7 +18,7 @@ PACEProjector = function( betas, proportionOfProbesRequired=0.8 ) {
   # Check if row names have more than 10 characters and rename if necessary
   if (any(nchar(rownames(betas)) > 10)) {
     rownames(betas) <- substr(rownames(betas), 1, 10)
-    print("This looks like EPICv2. DunedinPACE will proceed with some missing probes. You may need to lower the proportionOfProbesRequired.")
+    print("This looks like either 450k array or EPICv2 array data. If EPICv2, DunedinPACE will proceed with some missing probes. You may need to lower the proportionOfProbesRequired.")
   }
 
 
