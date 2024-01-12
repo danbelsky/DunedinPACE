@@ -11,11 +11,11 @@ This function returns the Dunedin Methylation Pace of Aging scores for methylati
 Missing data handled in two different ways (and the threshold for both is set by the 'proportionOfProbesRequired' parameter). First, if a sample is missing data for more probes than the threshold, the sample will get an NA back for a score.  If a particular probe is missing fewer samples than the threshold, then missing data is set to the mean in the provided 'betas' matrix.  If a probe is missing more samples than the threshold, then all samples in the 'betas' matrix have their value replaced with the mean of the training data for that particular model.
 
 }
-\usage{PACEProjector(betas, proportionOfProbesRequired = 0.8)}
+\usage{PACEProjector(betas, proportionOfProbesRequired = 0.7)}
 
 \arguments{
   \item{betas}{A numeric matrix containing the percent-methylation for each probe.  Missing data should be 'NA's.  The rows should be probes, with the probe ID as the row name, and the columns should be samples, with sample names as the column name.}
-  \item{proportionOfProbesRequired}{Default = 0.8.  This value specificies the threshold for missing data (see description for more details on how missing data is handled)}
+  \item{proportionOfProbesRequired}{Default = 0.7.  This value specificies the threshold for missing data (see description for more details on how missing data is handled)}
 }
 
 \details{
