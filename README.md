@@ -1,7 +1,7 @@
 # News
 ### DunedinPACE now works on EPICv2! 
 
-Follow instructions and formatting as for EPICv1 or 450k (below). If you have performed probe QC prior to DunedinPACE, you may need to lower the `proportionOfProbesRequired = 0.8` argument in the function, as EPICv2 is already missing some probes that were originally in EPICv1. Want more evidence that DunedinPACE works in EPICv2? See Karen Sugden's [excellent report](https://moffittcaspi.trinity.duke.edu/dunedinpace/validation-dunedinpace-epic-v2-data) on this topic by clicking on the link. 
+Follow instructions and formatting as for EPICv1 or 450k (below). If you have performed probe QC prior to DunedinPACE, you may need to lower the `proportionOfProbesRequired = 0.7` argument in the function, as EPICv2 is already missing some probes that were originally in EPICv1. More evidence supporting DunedinPACE in EPICv2 can be in Karen Sugden's [excellent report](https://moffittcaspi.trinity.duke.edu/dunedinpace/validation-dunedinpace-epic-v2-data). 
 
 ### DunedinPACE website is online
 A new [website with information on DunedinPACE](https://moffittcaspi.trinity.duke.edu/dunedinpace), hosted by Avshalom Caspi and Terrie Moffitt's lab is is now live. There you can find additional information about DunedinPACE, cohorts and studies where it has been deployed, some of the key findings, and interesting advancements and news related to the DunedinPACE tool. 
@@ -71,7 +71,7 @@ PACEProjector(betas)
 #####  proportionOfProbesRequired:
     This is the proportion of probes required to have a non-missing value for both the sample to have
     DunedinPACE calculated, as well as to determine if we can impute the mean from the current cohort.
-    By default, this is set to 0.8
+    By default, this is set to 0.7
 
 #### Output:
    A vector of DunedinPACE estimates.      
