@@ -1,8 +1,10 @@
 # News
-
 ### DunedinPACE now works on EPICv2! 
 
-Follow instructions and formatting as for EPICv2 or 450k (below). If you have performed probe QC prior to DunedinPACE, you may need to lower the `proportionOfProbesRequired = 0.8` argument in the function, as EPICv2 is already missing some probes that were originally in EPICv1. 
+Follow instructions and formatting as for EPICv1 or 450k (below). If you have performed probe QC prior to DunedinPACE, you may need to lower the `proportionOfProbesRequired = 0.8` argument in the function, as EPICv2 is already missing some probes that were originally in EPICv1. Want more evidence that DunedinPACE works in EPICv2? See Karen Sugden's [excellent report](https://moffittcaspi.trinity.duke.edu/dunedinpace/validation-dunedinpace-epic-v2-data) on this topic by clicking on the link. 
+
+### DunedinPACE website is online
+A new [website with information on DunedinPACE](https://moffittcaspi.trinity.duke.edu/dunedinpace), hosted by Avshalom Caspi and Terrie Moffitt's lab is is now live. There you can find additional information about DunedinPACE, cohorts and studies where it has been deployed, some of the key findings, and interesting advancements and news related to the DunedinPACE tool. 
 
 # Introduction to DunedinPACE
 DunedinPACE is a first of its kind blood DNA methylation biomarker of the pace of biological aging. It is designed to function as a speedometer for the aging process, estimating tehir pace of aging from a single blood sample. DunedinPACE values quantify how much faster or slower an individual is aging relative to the normative rate of one year of aging per year of calendar time. 
@@ -11,14 +13,14 @@ DunedinPACE is a first of its kind blood DNA methylation biomarker of the pace o
 DunedinPACE was developed to predict a [Pace of Aging phenotype](https://www.pnas.org/doi/10.1073/pnas.1506264112) in the Dunedin Longitudinal Study. The [version of the Pace of Aging used to train DunedinPACE](https://www.nature.com/articles/s43587-021-00044-4) was a composite of rates of change in 19 biomarkers of organ system integrity measured over four time points spanning 20 years of follow-up as the cohort aged from 26 to 45. 
 
 #### What is the evidence for using DunedinPACE to measure aging? 
-There are three lines of evidence that support the validity of DunedinPACE: First, DunedinPACE is predictive of diverse aging related outcomes, including disease, disability, and mortality[^1],[^2],[^3],[^4],[^5]. Second, DunedinPACE is associated with social determinants of healthy aging in young, midlife, and older adults[^1],[^6],[^7],[^8],[^9],[^10]. Third, Dunedin PACE shows evidence of being modified by calorie restriction[^11], an intervention that modifies the basic biology of aging in animal experiments[^12]. 
+There are three lines of evidence that support the validity of DunedinPACE: First, DunedinPACE is predictive of diverse aging related outcomes, including disease, disability, and mortality[^1],[^2],[^3],[^4],[^5]. Second, DunedinPACE is associated with social determinants of healthy aging in young, midlife, and older adults[^1],[^6],[^7],[^8],[^9],[^10]. Third, Dunedin PACE shows evidence of being modified by calorie restriction[^11], an intervention that modifies the basic biology of aging in animal experiments[^12].  
 
 #### What do I need to run DunedinPACE? 
 To run the package, you need DNA methylation data produced by the Illumina 450k, EPIC, or EPIC V2 arrays. The data should consist of a matrix of beta values (percent methylation at the CpG site) and must be formatted as follows: rows are individual probes; columns are samples; rownames are Illumina CpG probe names (i.e. cg###########). Although `DunedinPACE` reflects 'pace of aging', it is computed from a single measure DNA methylation data. 
 
 Once you have downloaded and installed the package, you simply load `DunedinPACE` library, load the beta matrix of your date into R and run the `PACEProjector()` function on the matrix. The output will be a vector of `DunedinPACE` values matched to sample IDs. 
 
-The easiest way to implement DunedinPACE is load the full beta matrix with all available CpGs (i.e. the whole genome). However, if you wish to work with a smaller data object, you can select the needed CpG sites from your data using the function `getrequired probes()` with the `backgroundList` argument set to “TRUE” (`backgroundList = TRUE).  This will return a matrix of 20,000 probes, including the `DunedinPACE` probes and a set of probes used for background normalization that ensure the computed values can be compared to the reference value of 1 year of biological aging per calendar year. (The default setting is `backgroundList = FALSE`, but will return only the 173 probes used to calculate `DunedinPACE`, but not the probes required for normalization).  
+The easiest way to implement DunedinPACE is load the full beta matrix with all available CpGs (i.e. the whole genome). However, if you wish to work with a smaller data object, you can select the needed CpG sites from your data using the function `getrequired probes()` with the `backgroundList` argument set to “TRUE” `(backgroundList = TRUE)`.  This will return a matrix of 20,000 probes, including the `DunedinPACE` probes and a set of probes used for background normalization that ensure the computed values can be compared to the reference value of 1 year of biological aging per calendar year. (The default setting is `backgroundList = FALSE`, but will return only the 173 probes used to calculate `DunedinPACE`, but not the probes required for normalization).  
 
 #### What values should I expect the package to return? 
 A “normal” `DunedinPACE` value for a midlife adult is 1.0. Younger people tend to have somewhat slower DunedinPACE values and older people tend to have somewhat faster DunedinPACE values (see Panel A from Figure below):
