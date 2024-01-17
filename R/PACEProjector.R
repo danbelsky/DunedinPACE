@@ -20,7 +20,7 @@ PACEProjector = function( betas, proportionOfProbesRequired=0.7 ) {
     rownames(betas) <- substr(rownames(betas), 1, 10)
   }
   
- if( any( grepl( "TC11", rownames(noob_betas)))) {
+ if( any( grepl( "TC11", rownames(betas)))) {
       print("This looks like EPICv2 array data. If EPICv2, DunedinPACE will lower the proportion of probes required to from 0.8 to 0.7 and proceed with some missing probes.")
   }
   
