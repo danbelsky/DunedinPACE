@@ -1,7 +1,7 @@
 # News
 ### DunedinPACE now works on EPICv2! 
 
-Follow instructions and formatting as for EPICv1 or 450k (below). If you have performed probe QC prior to DunedinPACE, you may need to lower the `proportionOfProbesRequired = 0.7` argument in the function, as EPICv2 is already missing some probes that were originally in EPICv1. More evidence supporting DunedinPACE in EPICv2 can be in Karen Sugden's [excellent report](https://moffittcaspi.trinity.duke.edu/dunedinpace/validation-dunedinpace-epic-v2-data). 
+Follow instructions and formatting as for EPICv1 or 450k (below). The function will detect EPICv2 data (if replicate suffixes are retained in the rownames) and will lower the `proportionOfProbesRequired = 0.8` to `0.7` as EPICv2 is already missing some probes that were originally in 450k and EPICv1. More evidence supporting DunedinPACE in EPICv2 can be in Karen Sugden's [excellent report](https://moffittcaspi.trinity.duke.edu/dunedinpace/validation-dunedinpace-epic-v2-data). 
 
 ### DunedinPACE website is online
 A new [website with information on DunedinPACE](https://moffittcaspi.trinity.duke.edu/dunedinpace), hosted by Avshalom Caspi and Terrie Moffitt's lab is is now live. There you can find additional information about DunedinPACE, cohorts and studies where it has been deployed, some of the key findings, and interesting advancements and news related to the DunedinPACE tool. 

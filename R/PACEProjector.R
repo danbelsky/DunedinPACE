@@ -3,7 +3,7 @@
 #' \code{PACEProjector} returns the Dunedin Pace of Aging Methylation Scores
 #'
 #' @param betas A numeric matrix containing the percent-methylation for each probe.  Missing data should be 'NA's.  The rows should be probes, with the probe ID as the row name, and the columns should be samples, with sample names as the column name.
-#' @param proportionOfProbesRequired (default: 0.7).  This value specificies the threshold for missing data (see description for more details on how missing data is handled)
+#' @param proportionOfProbesRequired (default: 0.8).  This value specificies the threshold for missing data (see description for more details on how missing data is handled). Note: that if the function detects EPICv2 data based on rownames that contain the replicate suffix, the proportion of probes required will automatically be lowered to 0.7.
 #' @return A list of mPACE values.  There will be one element in the list for each mPACE model.  Each element will consist of a numeric vector with mPACE values.  The names of the values in the vector will be the sample names from the 'betas' matrix. The output is equivalent to the pace of aging (in years) expected over a 1-year period.
 #' @details This function returns the Dunedin Methylation Pace of Aging scores for methylation data generated from either the Illumina 450K array or the Illumina EPIC array.  The Age45 score is one that has been trained on data based on 3 waves of collection (26, 38, and 45).  The manuscript is currently in preparation, but has been shown to be more accurate than the Age38 score.
 #' Missing data handled in two different ways (and the threshold for both is set by the 'proportionOfProbesRequired' parameter).  First, if a sample is missing data for more probes than the threshold, the sample will get an NA back for a score.  If a particular probe is missing fewer samples than the threshold, then missing data is set to the mean in the provided 'betas' matrix.  If a probe is missing more samples than the threshold, then all samples in the 'betas' matrix have their value replaced with the mean of the training data for that particular model.
@@ -12,18 +12,30 @@
 #' PACEProjector(betas)
 
 
-PACEProjector = function( betas, proportionOfProbesRequired=0.7 ) {
+PACEProjector = function( betas, proportionOfProbesRequired=0.8 ) {
   requireNamespace("preprocessCore")
 
-  # Check if row names have more than 10 characters and rename if necessary
-  if (any(nchar(rownames(betas)) > 10)) {
-    rownames(betas) <- substr(rownames(betas), 1, 10)
+  if( any(grepl("TC|BC", rownames(betas))) )
+  {
+    # Print message to user
+    print("This looks like EPICv2 array data. If EPICv2, DunedinPACE will lower the proportionOfProbesRequired to 0.7 and proceed with missing probes present on 450k and EPICv1. Averaging the opposite strand replicates may take a bit more time.")
+
+    # Proceed with averaging: Code taken from ENmix package.
+    cgid = sapply(strsplit(rownames(betas), split = "_"),  unlist)[1, ]
+    dupcg = unique(cgid[duplicated(cgid)])
+    betas2 = betas[cgid %in% dupcg, ]
+    cid = sapply(strsplit(rownames(betas2), split = "_"),   unlist)[1, ]
+    betas2 = aggregate(betas2, by = list(cid), FUN = function(x) mean(x, na.rm = TRUE))
+    rownames(betas2) = betas2[, 1]
+    betas2 = as.matrix(betas2[, -1])
+    betas = betas[!(cgid %in% dupcg), ]
+    rownames(betas) = sapply(strsplit(rownames(betas), split = "_"), unlist)[1, ]
+    rbind(betas, betas2)
+
+    # Set proportionOfProbesRequired to 0.7 if condition is TRUE
+    proportionOfProbesRequired <- 0.7
   }
-  
- if( any( grepl( "TC11", rownames(betas)))) {
-      print("This looks like EPICv2 array data. If EPICv2, DunedinPACE will lower the proportion of probes required to from 0.8 to 0.7 and proceed with some missing probes.")
-  }
-  
+
   # loop through models
   model_results <- lapply(mPACE_Models$model_names, function(model_name) {
     # make sure it has been converted to a matrix
@@ -105,8 +117,4 @@ PACEProjector = function( betas, proportionOfProbesRequired=0.7 ) {
 
 
 
-# Note: This is a function to print an error for PoAmProjector as a result of the name change of the function.
 
-PoAmProjector <- function(beta_matrix) {
-  .Defunct(msg = "Function `PoAmProjector()` has been replaced by `PACEProjector()`...\nUse `PACEProjector()` instead")
-}
