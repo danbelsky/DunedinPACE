@@ -30,7 +30,7 @@ PACEProjector = function( betas, proportionOfProbesRequired=0.8 ) {
     betas2 = as.matrix(betas2[, -1])
     betas = betas[!(cgid %in% dupcg), ]
     rownames(betas) = sapply(strsplit(rownames(betas), split = "_"), unlist)[1, ]
-    rbind(betas, betas2)
+    betas <-rbind(betas, betas2)
 
     # Set proportionOfProbesRequired to 0.7 if condition is TRUE
     proportionOfProbesRequired <- 0.7
