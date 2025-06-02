@@ -7,7 +7,7 @@ Follow instructions and formatting as for EPICv1 or 450k (below). The function w
 A new [website with information on DunedinPACE](https://moffittcaspi.trinity.duke.edu/dunedinpace), hosted by Avshalom Caspi and Terrie Moffitt's lab is is now live. There you can find additional information about DunedinPACE, cohorts and studies where it has been deployed, some of the key findings, and interesting advancements and news related to the DunedinPACE tool. 
 
 # Introduction to DunedinPACE
-DunedinPACE is a first of its kind blood DNA methylation biomarker of the pace of biological aging. It is designed to function as a speedometer for the aging process, estimating tehir pace of aging from a single blood sample. DunedinPACE values quantify how much faster or slower an individual is aging relative to the normative rate of one year of aging per year of calendar time. 
+DunedinPACE is a first of its kind blood DNA methylation biomarker of the pace of biological aging. It is designed to function as a speedometer for the aging process, estimating their pace of aging from a single blood sample. DunedinPACE values quantify how much faster or slower an individual is aging relative to the normative rate of one year of aging per year of calendar time. 
 
 [![Watch a video about DunedinPACE here!](https://img.youtube.com/vi/VIDEO_ID/0.jpg)](https://www.youtube.com/watch?v=0gmH-2nSFDA)
 
