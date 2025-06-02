@@ -1,4 +1,11 @@
+
+#### **Important Notice:**
+This site and algorithm is ${\textsf{\color{red}for research users only, not commercial use.}}$ Commercial users should contact exclusive DunedinPACE licensee [TruDiagnostic<sup>TM</sup>](https://trudiagnostic.com/).
+
+---
+
 # News
+
 ### DunedinPACE now works on EPICv2! 
 
 Follow instructions and formatting as for EPICv1 or 450k (below). The function will detect EPICv2 data (if replicate suffixes are retained in the rownames) and will lower the `proportionOfProbesRequired = 0.8` to `0.7` as EPICv2 is already missing some probes that were originally in 450k and EPICv1. More evidence supporting DunedinPACE in EPICv2 can be in Karen Sugden's [excellent report](https://moffittcaspi.trinity.duke.edu/dunedinpace/validation-dunedinpace-epic-v2-data). 
