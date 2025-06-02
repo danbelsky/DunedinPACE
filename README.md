@@ -16,7 +16,7 @@ A new [website with information on DunedinPACE](https://moffittcaspi.trinity.duk
 # Introduction to DunedinPACE
 DunedinPACE is a first of its kind blood DNA methylation biomarker of the pace of biological aging. It is designed to function as a speedometer for the aging process, estimating their pace of aging from a single blood sample. DunedinPACE values quantify how much faster or slower an individual is aging relative to the normative rate of one year of aging per year of calendar time. 
 
-[![Watch a video about DunedinPACE here!](https://img.youtube.com/vi/VIDEO_ID/0.jpg)](https://www.youtube.com/watch?v=0gmH-2nSFDA)
+[![Watch a video about DunedinPACE here!](https://img.youtube.com/vi/v=0gmH-2nSFDA/0.jpg)](https://www.youtube.com/watch?v=0gmH-2nSFDA)
 
 #### How was DunedinPACE developed? 
 DunedinPACE was developed to predict a [Pace of Aging phenotype](https://www.pnas.org/doi/10.1073/pnas.1506264112) in the Dunedin Longitudinal Study. The [version of the Pace of Aging used to train DunedinPACE](https://www.nature.com/articles/s43587-021-00044-4) was a composite of rates of change in 19 biomarkers of organ system integrity measured over four time points spanning 20 years of follow-up as the cohort aged from 26 to 45. 
